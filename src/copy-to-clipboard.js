@@ -27,12 +27,7 @@ const copyToClipboard = (content) => {
     const stat = await fs.promises.stat(filePath)
     if (stat.isFile()) {
       const extname = path.extname(filePath).toLowerCase()
-      if (
-        extname === '.js' ||
-        extname === '.jsx' ||
-        extname === '.ts' ||
-        extname === '.tsx'
-      ) {
+      if (/\.(jsx?|tsx?)$/.test(extname)) {
         const relativePath = path.relative(folderPath, filePath)
         const comment = `// ${relativePath}\n`
         const fileContents =
